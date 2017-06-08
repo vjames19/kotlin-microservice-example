@@ -1,0 +1,58 @@
+buildscript {
+    ext {
+        kotlinVersion = '1.1.2-2'
+    }
+
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+allprojects {
+    group 'io.github.vjames19.kotlinmicroserviceexample'
+    version '1.0-SNAPSHOT'
+
+    apply plugin: 'java'
+    apply plugin: 'kotlin'
+
+}
+
+subprojects {
+    sourceCompatibility = 1.8
+
+    repositories {
+        jcenter()
+    }
+
+
+    apply plugin: 'java'
+    apply plugin: 'kotlin'
+
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion"
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
+
+    compileKotlin {
+        kotlinOptions {
+            apiVersion = "1.1"
+            jvmTarget = "1.8"
+        }
+    }
+
+    compileTestKotlin {
+        kotlinOptions {
+            apiVersion = "1.1"
+            jvmTarget = "1.8"
+        }
+    }
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.5'
+    distributionType = org.gradle.api.tasks.wrapper.Wrapper.DistributionType.ALL
+}

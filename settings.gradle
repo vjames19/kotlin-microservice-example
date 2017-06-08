@@ -1,0 +1,4 @@
+rootProject.name = 'kotlin-microservice-example'
+
+include 'domain', 'domain-implementation'
+
