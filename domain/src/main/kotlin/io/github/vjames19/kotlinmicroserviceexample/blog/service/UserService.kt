@@ -11,5 +11,5 @@ interface UserService {
 
     fun getUser(id: Long): CompletableFuture<Optional<User>>
 
-    fun create(user: User): CompletableFuture<*>
+    fun create(user: User): CompletableFuture<User>
 }

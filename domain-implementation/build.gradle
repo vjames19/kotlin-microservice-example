@@ -1,0 +1,31 @@
+buildscript {
+    ext {
+        requeryVersion = "1.3.2"
+    }
+}
+
+apply plugin: 'kotlin-kapt'
+apply plugin: 'idea'
+
+kapt {
+    generateStubs = true
+}
+
+// Add kapt directory to sources
+sourceSets.main.java.srcDir file("$buildDir/generated/source/kapt/")
+
+idea {
+    module {
+// Tell idea to mark the folder as generated sources
+        generatedSourceDirs += file("$buildDir/generated/source/kapt/")
+    }
+}
+
+
+dependencies {
+    compile project(":domain")
+    compile "io.requery:requery:$requeryVersion"
+    compile "io.requery:requery-kotlin:$requeryVersion"
+    compile "com.google.inject:guice:$guiceVersion"
+    kapt "io.requery:requery-processor:$requeryVersion"
+}
