@@ -15,6 +15,7 @@ interface PostModel : Persistable {
     var id: Long
 
     @get:ForeignKey(references = UserModel::class)
+    @get:Column(name = "user_id")
     var userId: Long
 
     var content: String

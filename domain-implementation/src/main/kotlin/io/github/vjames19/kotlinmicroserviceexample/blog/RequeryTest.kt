@@ -1,7 +1,9 @@
 package io.github.vjames19.kotlinmicroserviceexample.blog
 
+import io.github.vjames19.kotlinmicroserviceexample.blog.domain.Post
 import io.github.vjames19.kotlinmicroserviceexample.blog.domain.User
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.Models
+import io.github.vjames19.kotlinmicroserviceexample.blog.service.RequeryPostService
 import io.github.vjames19.kotlinmicroserviceexample.blog.service.RequeryUserService
 import io.requery.Persistable
 import io.requery.sql.KotlinConfiguration
@@ -25,13 +27,23 @@ fun main(args: Array<String>) {
             statementCacheSize = 0,
             useDefaultLogging = true)
     val instance = KotlinEntityDataStore<Persistable>(configuration)
-
-    val service = RequeryUserService(instance, Executors.newCachedThreadPool())
+    val executor = Executors.newCachedThreadPool()
+    val service = RequeryUserService(instance, executor)
 
     println(service.getUser(1).get())
 
     println(service.create(User(id = 0, username = "user${System.currentTimeMillis()}")).get())
     println(service.create(User(id = 0, username = "user${System.currentTimeMillis()}")).get())
-//    println(service.create(User(id = 0, username = "vjames19")).get())
+
+    try {
+        println(service.create(User(id = 0, username = "vjames19")).get())
+    } catch (e: Exception) {
+        println("Error updating existing")
+        e.printStackTrace()
+    }
+
+    val postService = RequeryPostService(instance, executor)
+
+    println(postService.update(Post(id = Long.MAX_VALUE, userId = 1, content = "some invalid content")).get())
 
 }

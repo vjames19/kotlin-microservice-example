@@ -3,12 +3,12 @@ package io.github.vjames19.kotlinmicroserviceexample.blog.service
 import io.github.vjames19.kotlinmicroserviceexample.blog.di.DbExecutorService
 import io.github.vjames19.kotlinmicroserviceexample.blog.domain.Post
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.PostModel
-import io.github.vjames19.kotlinmicroserviceexample.blog.model.PostModelEntity
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.toDomain
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.toModel
-import io.github.vjames19.kotlinmicroserviceexample.blog.util.convertUpdateCodeToOptional
+import io.github.vjames19.kotlinmicroserviceexample.blog.util.doUpdate
 import io.github.vjames19.kotlinmicroserviceexample.blog.util.execute
 import io.github.vjames19.kotlinmicroserviceexample.blog.util.firstOption
+import io.github.vjames19.kotlinmicroserviceexample.blog.util.toOptional
 import io.requery.Persistable
 import io.requery.kotlin.eq
 import io.requery.sql.KotlinEntityDataStore
@@ -39,19 +39,14 @@ class RequeryPostService @Inject constructor(val db: KotlinEntityDataStore<Persi
     }
 
     override fun update(post: Post): CompletableFuture<Optional<Post>> = db.execute(executor) {
-        db.update()
-                .set(PostModelEntity.CONTENT, post.content)
-                .where(PostModelEntity::id eq (post.id))
-                .get()
-                .value()
-                .convertUpdateCodeToOptional()
-                .map { post }
+        doUpdate {
+            update(post.toModel()).toDomain()
+        }
     }
 
     override fun delete(id: Long): CompletableFuture<Optional<*>> = db.execute(executor) {
         (db.delete(PostModel::class) where (PostModel::id eq id))
                 .get()
-                .value()
-                .convertUpdateCodeToOptional()
+                .toOptional()
     }
 }

@@ -6,8 +6,8 @@ import io.github.vjames19.kotlinmicroserviceexample.blog.model.CommentModel
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.CommentModelEntity
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.toDomain
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.toModel
-import io.github.vjames19.kotlinmicroserviceexample.blog.util.convertUpdateCodeToOptional
 import io.github.vjames19.kotlinmicroserviceexample.blog.util.execute
+import io.github.vjames19.kotlinmicroserviceexample.blog.util.toOptional
 import io.requery.Persistable
 import io.requery.kotlin.eq
 import io.requery.sql.KotlinEntityDataStore
@@ -37,14 +37,12 @@ class RequeryCommentService @Inject constructor(val db: KotlinEntityDataStore<Pe
                 .set(CommentModelEntity.CONTENT, comment.text)
                 .where(CommentModel::id eq (comment.id))
                 .get()
-                .value()
-                .convertUpdateCodeToOptional()
+                .toOptional()
                 .map { comment }
     }
 
     override fun delete(id: Long): CompletableFuture<Optional<*>> = db.execute(executor) {
         delete().where(CommentModel::id eq (id)).get()
-                .value()
-                .convertUpdateCodeToOptional()
+                .toOptional()
     }
 }

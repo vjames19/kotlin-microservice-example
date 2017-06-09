@@ -16,10 +16,12 @@ interface CommentModel : Persistable {
     var id: Long
 
     @get:ForeignKey(references = UserModel::class)
+    @get:Column(name = "user_id")
     var userId: Long
 
     @get:ManyToOne
     @get:ForeignKey(references = PostModel::class)
+    @get:Column(name = "post_id")
     var postId: Long
 
     var content: String
