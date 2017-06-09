@@ -2,7 +2,8 @@ package io.github.vjames19.kotlinmicroserviceexample.blog.service
 
 import io.github.vjames19.kotlinmicroserviceexample.blog.di.DbExecutorService
 import io.github.vjames19.kotlinmicroserviceexample.blog.domain.Comment
-import io.github.vjames19.kotlinmicroserviceexample.blog.model.CommentEntity
+import io.github.vjames19.kotlinmicroserviceexample.blog.model.CommentModel
+import io.github.vjames19.kotlinmicroserviceexample.blog.model.CommentModelEntity
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.toDomain
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.toModel
 import io.github.vjames19.kotlinmicroserviceexample.blog.util.convertUpdateCodeToOptional
@@ -14,8 +15,6 @@ import java.util.*
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
-import io.github.vjames19.kotlinmicroserviceexample.blog.model.Comment as CommentModel
-import io.github.vjames19.kotlinmicroserviceexample.blog.model.User as UserDao
 
 /**
  * Created by victor.reventos on 6/8/17.
@@ -35,7 +34,7 @@ class RequeryCommentService @Inject constructor(val db: KotlinEntityDataStore<Pe
 
     override fun update(comment: Comment): CompletableFuture<Optional<Comment>> = db.execute(executor) {
         db.update()
-                .set(CommentEntity.CONTENT, comment.text)
+                .set(CommentModelEntity.CONTENT, comment.text)
                 .where(CommentModel::id eq (comment.id))
                 .get()
                 .value()

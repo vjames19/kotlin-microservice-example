@@ -15,7 +15,7 @@ interface PostService {
 
     fun create(post: Post): CompletableFuture<Post>
 
-    fun update(post: Post): CompletableFuture<Post>
+    fun update(post: Post): CompletableFuture<Optional<Post>>
 
     fun delete(id: Long): CompletableFuture<Optional<*>>
 

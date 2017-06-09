@@ -2,6 +2,7 @@ package io.github.vjames19.kotlinmicroserviceexample.blog.service
 
 import io.github.vjames19.kotlinmicroserviceexample.blog.di.DbExecutorService
 import io.github.vjames19.kotlinmicroserviceexample.blog.domain.User
+import io.github.vjames19.kotlinmicroserviceexample.blog.model.UserModel
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.toDomain
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.toModel
 import io.github.vjames19.kotlinmicroserviceexample.blog.util.execute
@@ -13,7 +14,6 @@ import java.util.*
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
-import io.github.vjames19.kotlinmicroserviceexample.blog.model.User as UserModel
 
 /**
  * Created by victor.reventos on 6/8/17.

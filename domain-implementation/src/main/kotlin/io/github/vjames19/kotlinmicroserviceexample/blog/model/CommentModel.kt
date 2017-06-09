@@ -1,7 +1,7 @@
 package io.github.vjames19.kotlinmicroserviceexample.blog.model
 
+import io.github.vjames19.kotlinmicroserviceexample.blog.domain.Comment
 import io.requery.*
-import io.github.vjames19.kotlinmicroserviceexample.blog.domain.Comment as CommentDomain
 
 
 /**
@@ -9,29 +9,29 @@ import io.github.vjames19.kotlinmicroserviceexample.blog.domain.Comment as Comme
  */
 @Entity
 @Table(name = "comments")
-interface Comment : Persistable {
+interface CommentModel : Persistable {
 
     @get:Key
     @get:Generated
     var id: Long
 
-    @get:ForeignKey(references = User::class)
+    @get:ForeignKey(references = UserModel::class)
     var userId: Long
 
     @get:ManyToOne
-    @get:ForeignKey(references = Post::class)
+    @get:ForeignKey(references = PostModel::class)
     var postId: Long
 
     var content: String
 }
 
-fun Comment.toDomain(): CommentDomain {
-    return CommentDomain(id = id, postId = postId, userId = userId, text = content)
+fun CommentModel.toDomain(): Comment {
+    return Comment(id = id, postId = postId, userId = userId, text = content)
 }
 
-fun CommentDomain.toModel(): Comment {
+fun Comment.toModel(): CommentModel {
     val ref = this
-    return CommentEntity().apply {
+    return CommentModelEntity().apply {
         id = ref.id
         userId = ref.userId
         postId = ref.postId

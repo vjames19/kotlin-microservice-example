@@ -10,7 +10,7 @@ import java.util.function.Supplier
 /**
  * Created by victor.reventos on 6/9/17.
  */
-fun <T: Any, V> KotlinEntityDataStore<T>.execute(executorService: ExecutorService, block: KotlinEntityDataStore<T>.() -> V): CompletableFuture<V> {
+inline fun <T: Any, V> KotlinEntityDataStore<T>.execute(executorService: ExecutorService, crossinline block: KotlinEntityDataStore<T>.() -> V): CompletableFuture<V> {
     return CompletableFuture.supplyAsync(Supplier { block() }, executorService)
 }
 

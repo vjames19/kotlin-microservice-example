@@ -30,8 +30,8 @@ fun main(args: Array<String>) {
 
     println(service.getUser(1).get())
 
-//    println(service.create(User(id = 0, username = "user${System.currentTimeMillis()}")).get())
-//    println(service.create(User(id = 0, username = "user${System.currentTimeMillis()}")).get())
-    println(service.create(User(id = 0, username = "vjames19")).get())
+    println(service.create(User(id = 0, username = "user${System.currentTimeMillis()}")).get())
+    println(service.create(User(id = 0, username = "user${System.currentTimeMillis()}")).get())
+//    println(service.create(User(id = 0, username = "vjames19")).get())
 
 }
