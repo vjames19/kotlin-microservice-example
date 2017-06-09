@@ -6,6 +6,7 @@ import io.github.vjames19.kotlinmicroserviceexample.blog.domain.User as UserDoma
  * Created by victor.reventos on 6/8/17.
  */
 @Entity
+@Table(name = "users")
 interface User : Persistable {
 
     @get:Key
@@ -17,4 +18,12 @@ interface User : Persistable {
 }
 
 fun User.toDomain(): UserDomain = UserDomain(id = id, username =  username)
+
+fun UserDomain.toModel(): User {
+    val ref = this
+    return UserEntity().apply {
+        id = ref.id
+        username = ref.username
+    }
+}
 

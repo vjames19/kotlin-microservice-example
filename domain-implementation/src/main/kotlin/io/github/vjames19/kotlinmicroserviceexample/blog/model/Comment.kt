@@ -8,6 +8,7 @@ import io.github.vjames19.kotlinmicroserviceexample.blog.domain.Comment as Comme
  * Created by victor.reventos on 6/8/17.
  */
 @Entity
+@Table(name = "comments")
 interface Comment : Persistable {
 
     @get:Key
@@ -21,9 +22,19 @@ interface Comment : Persistable {
     @get:ForeignKey(references = Post::class)
     var postId: Long
 
-    var text: String
+    var content: String
 }
 
 fun Comment.toDomain(): CommentDomain {
-    return CommentDomain(id = id, postId = postId, userId = userId, text = text)
+    return CommentDomain(id = id, postId = postId, userId = userId, text = content)
+}
+
+fun CommentDomain.toModel(): Comment {
+    val ref = this
+    return CommentEntity().apply {
+        id = ref.id
+        userId = ref.userId
+        postId = ref.postId
+        content = ref.text
+    }
 }
