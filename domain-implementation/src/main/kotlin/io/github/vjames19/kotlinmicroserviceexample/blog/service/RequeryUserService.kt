@@ -14,10 +14,12 @@ import java.util.*
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by victor.reventos on 6/8/17.
  */
+@Singleton
 class RequeryUserService @Inject constructor(val db: KotlinEntityDataStore<Persistable>,
                                              @DbExecutorService val executor: ExecutorService) : UserService {
 

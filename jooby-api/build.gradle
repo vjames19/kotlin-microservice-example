@@ -1,0 +1,12 @@
+dependencies {
+    compile project(":domain-implementation")
+    compile 'org.jooby:jooby-lang-kotlin:1.1.2'
+    compile "org.jooby:jooby-netty:1.1.2"
+    compile "org.jooby:jooby-jackson:1.1.2"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.8.7"
+}
+
+apply plugin: 'application'
+
+mainClassName = "io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby.ServerKt"
+

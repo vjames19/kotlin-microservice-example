@@ -24,7 +24,7 @@ fun main(args: Array<String>) {
     val configuration = KotlinConfiguration(
             dataSource = dataSource,
             model = Models.DEFAULT,
-            statementCacheSize = 0,
+            statementCacheSize = 100,
             useDefaultLogging = true)
     val instance = KotlinEntityDataStore<Persistable>(configuration)
     val executor = Executors.newCachedThreadPool()

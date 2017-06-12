@@ -1,4 +1,3 @@
 rootProject.name = 'kotlin-microservice-example'
 
-include 'domain', 'domain-implementation'
-
+include 'domain', 'domain-implementation', 'jooby-api'
