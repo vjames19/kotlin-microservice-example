@@ -1,4 +1,4 @@
-package io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby
+package io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby.endpoint
 
 import io.github.vjames19.kotlinmicroserviceexample.blog.domain.Post
 import io.github.vjames19.kotlinmicroserviceexample.blog.domain.User

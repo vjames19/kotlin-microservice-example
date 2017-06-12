@@ -4,8 +4,7 @@ import com.google.inject.Provides
 import com.google.inject.Singleton
 import io.github.vjames19.kotlinmicroserviceexample.blog.di.DbExecutorService
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.Models
-import io.github.vjames19.kotlinmicroserviceexample.blog.service.RequeryUserService
-import io.github.vjames19.kotlinmicroserviceexample.blog.service.UserService
+import io.github.vjames19.kotlinmicroserviceexample.blog.service.*
 import io.requery.Persistable
 import io.requery.sql.KotlinConfiguration
 import io.requery.sql.KotlinEntityDataStore
@@ -19,6 +18,8 @@ import java.util.concurrent.Executors
 object ServiceModule : Module() {
     override fun configure() {
         bind(UserService::class.java).to(RequeryUserService::class.java)
+        bind(PostService::class.java).to(RequeryPostService::class.java)
+        bind(CommentService::class.java).to(RequeryCommentService::class.java)
     }
 
     @Provides
