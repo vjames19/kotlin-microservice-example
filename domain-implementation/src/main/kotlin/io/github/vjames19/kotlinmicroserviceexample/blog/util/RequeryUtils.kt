@@ -16,7 +16,7 @@ inline fun <T : Any, V> KotlinEntityDataStore<T>.execute(executorService: Execut
     return CompletableFuture.supplyAsync(Supplier { block() }, executorService)
 }
 
-fun <T> Result<T>.firstOption(): Optional<T> = Optional.ofNullable(first())
+fun <T> Result<T>.firstOption(): Optional<T> = Optional.ofNullable(firstOrNull())
 
 fun Scalar<Int>.toOptional(): Optional<Int> {
     val v = value()
