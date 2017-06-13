@@ -5,18 +5,12 @@ import io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby.di.ServiceMod
 import io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby.endpoint.PostEndpoint
 import io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby.endpoint.UsersEndpoint
 import io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby.renderer.OptionalMapper
-import org.jooby.AsyncMapper
-import org.jooby.RequestLogger
-import org.jooby.Route
-import org.jooby.run
+import org.jooby.*
 import org.jooby.json.Jackson
 
 
-/**
- * Created by victor.reventos on 6/12/17.
- */
-fun main(args: Array<String>) {
-    run(*args) {
+fun app(): Jooby {
+    return jooby {
         use(ServiceModule)
         use(Jackson().module(KotlinModule()))
 
@@ -27,4 +21,21 @@ fun main(args: Array<String>) {
         use(UsersEndpoint::class)
         use(PostEndpoint::class)
     }
+}
+/**
+ * Created by victor.reventos on 6/12/17.
+ */
+fun main(args: Array<String>) {
+    Jooby.run(::app, args)
+//    run(*args) {
+//        use(ServiceModule)
+//        use(Jackson().module(KotlinModule()))
+//
+//        map(AsyncMapper())
+//        map(OptionalMapper())
+//
+//        use("*", RequestLogger().latency())
+//        use(UsersEndpoint::class)
+//        use(PostEndpoint::class)
+//    }
 }
