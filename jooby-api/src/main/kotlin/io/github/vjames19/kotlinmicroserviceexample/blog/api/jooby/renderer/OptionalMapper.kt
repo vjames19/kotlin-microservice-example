@@ -1,6 +1,9 @@
 package io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby.renderer
 
-import org.jooby.*
+import org.jooby.Result
+import org.jooby.Results
+import org.jooby.Route
+import org.jooby.Status
 import java.util.*
 import java.util.concurrent.CompletableFuture
 

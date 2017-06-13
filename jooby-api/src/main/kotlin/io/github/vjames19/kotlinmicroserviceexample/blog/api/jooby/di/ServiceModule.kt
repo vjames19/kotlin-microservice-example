@@ -17,9 +17,9 @@ import java.util.concurrent.Executors
  */
 object ServiceModule : Module() {
     override fun configure() {
-        bind(UserService::class.java).to(RequeryUserService::class.java)
-        bind(PostService::class.java).to(RequeryPostService::class.java)
-        bind(CommentService::class.java).to(RequeryCommentService::class.java)
+        bind<UserService>().to<RequeryUserService>()
+        bind<PostService>().to<RequeryPostService>()
+        bind<CommentService>().to<RequeryCommentService>()
     }
 
     @Provides

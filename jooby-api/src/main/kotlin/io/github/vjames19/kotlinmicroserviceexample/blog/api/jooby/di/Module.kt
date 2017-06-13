@@ -14,6 +14,14 @@ abstract class Module : Jooby.Module, AbstractModule() {
         binder.install(this)
     }
 
+    override public fun binder(): Binder {
+        return super.binder()
+    }
+
+    fun b(): Binder {
+        return super.binder()
+    }
+
     override fun configure() {
     }
 }
