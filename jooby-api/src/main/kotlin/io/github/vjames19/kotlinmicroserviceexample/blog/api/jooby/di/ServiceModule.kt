@@ -5,6 +5,7 @@ import com.google.inject.Singleton
 import io.github.vjames19.kotlinmicroserviceexample.blog.di.DbExecutorService
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.Models
 import io.github.vjames19.kotlinmicroserviceexample.blog.service.*
+import io.github.vjames19.kotlinmicroserviceexample.blog.util.KotlinCompletableEntityStore
 import io.requery.Persistable
 import io.requery.sql.KotlinConfiguration
 import io.requery.sql.KotlinEntityDataStore
@@ -24,7 +25,7 @@ object ServiceModule : Module() {
 
     @Provides
     @Singleton
-    fun providesEntityDataStore(): KotlinEntityDataStore<Persistable> {
+    fun providesEntityDataStore(@DbExecutorService executorService: ExecutorService): KotlinCompletableEntityStore<Persistable> {
         val dataSource = PGSimpleDataSource().apply {
             user = "postgres"
             password = "postgres"
@@ -37,7 +38,7 @@ object ServiceModule : Module() {
                 statementCacheSize = 100,
                 useDefaultLogging = true)
 
-        return KotlinEntityDataStore(configuration)
+        return KotlinCompletableEntityStore(KotlinEntityDataStore(configuration), executorService)
     }
 
     @Provides

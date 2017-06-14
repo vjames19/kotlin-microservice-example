@@ -5,6 +5,7 @@ import io.github.vjames19.kotlinmicroserviceexample.blog.domain.User
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.Models
 import io.github.vjames19.kotlinmicroserviceexample.blog.service.RequeryPostService
 import io.github.vjames19.kotlinmicroserviceexample.blog.service.RequeryUserService
+import io.github.vjames19.kotlinmicroserviceexample.blog.util.KotlinCompletableEntityStore
 import io.requery.Persistable
 import io.requery.sql.KotlinConfiguration
 import io.requery.sql.KotlinEntityDataStore
@@ -26,9 +27,9 @@ fun main(args: Array<String>) {
             model = Models.DEFAULT,
             statementCacheSize = 100,
             useDefaultLogging = true)
-    val instance = KotlinEntityDataStore<Persistable>(configuration)
     val executor = Executors.newCachedThreadPool()
-    val service = RequeryUserService(instance, executor)
+    val instance = KotlinCompletableEntityStore(KotlinEntityDataStore<Persistable>(configuration), executor)
+    val service = RequeryUserService(instance)
 
     println(service.getUser(1).get())
 
@@ -42,7 +43,7 @@ fun main(args: Array<String>) {
         e.printStackTrace()
     }
 
-    val postService = RequeryPostService(instance, executor)
+    val postService = RequeryPostService(instance)
 
     println(postService.update(Post(id = Long.MAX_VALUE, userId = 1, content = "some invalid content")).get())
 
