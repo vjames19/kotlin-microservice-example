@@ -4,9 +4,15 @@ buildscript {
     }
 }
 
-apply plugin: 'kotlin-kapt'
-apply plugin: 'idea'
-apply plugin: 'application'
+plugins {
+    id "org.flywaydb.flyway" version "4.2.0"
+}
+
+apply plugin: "kotlin-kapt"
+apply plugin: "idea"
+apply plugin: "application"
+
+
 
 mainClassName = "io.github.vjames19.kotlinmicroserviceexample.blog.RequeryTestKt"
 
@@ -19,9 +25,15 @@ sourceSets.main.java.srcDir file("$buildDir/generated/source/kapt/")
 
 idea {
     module {
-// Tell idea to mark the folder as generated sources
+        // Tell idea to mark the folder as generated sources
         generatedSourceDirs += file("$buildDir/generated/source/kapt/")
     }
+}
+
+flyway {
+    url = "jdbc:postgresql://localhost/blog"
+    user = "postgres"
+    password = "postgres"
 }
 
 
