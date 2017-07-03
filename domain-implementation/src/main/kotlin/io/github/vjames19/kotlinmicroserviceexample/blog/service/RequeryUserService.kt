@@ -1,11 +1,14 @@
 package io.github.vjames19.kotlinmicroserviceexample.blog.service
 
+import io.github.vjames19.futures.jdk8.recover
 import io.github.vjames19.kotlinmicroserviceexample.blog.domain.User
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.UserModel
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.toDomain
 import io.github.vjames19.kotlinmicroserviceexample.blog.model.toModel
 import io.github.vjames19.kotlinmicroserviceexample.blog.util.KotlinCompletableEntityStore
 import io.github.vjames19.kotlinmicroserviceexample.blog.util.firstOption
+import io.github.vjames19.kotlinmicroserviceexample.blog.util.handlePsqlException
+import io.github.vjames19.kotlinmicroserviceexample.blog.util.isIntegrityConstrainViolation
 import io.requery.Persistable
 import io.requery.kotlin.eq
 import java.util.*
@@ -29,5 +32,10 @@ class RequeryUserService @Inject constructor(val db: KotlinCompletableEntityStor
     override fun create(user: User): CompletableFuture<User> = db.execute {
         insert(user.toModel())
                 .toDomain()
+    }.recover { handleError(user, it) }
+
+    private fun <A> handleError(user: User, throwable: Throwable): A = handlePsqlException(throwable) {
+        if (it.isIntegrityConstrainViolation()) throw UsernameAlreadyExistsUserServiceError(user.username)
+        throw throwable
     }
 }

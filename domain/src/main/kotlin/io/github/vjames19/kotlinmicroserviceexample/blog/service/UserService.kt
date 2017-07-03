@@ -1,6 +1,7 @@
 package io.github.vjames19.kotlinmicroserviceexample.blog.service
 
 import io.github.vjames19.kotlinmicroserviceexample.blog.domain.User
+import org.omg.SendingContext.RunTime
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
@@ -11,5 +12,6 @@ interface UserService {
 
     fun getUser(id: Long): CompletableFuture<Optional<User>>
 
+    @Throws(UserServiceError::class)
     fun create(user: User): CompletableFuture<User>
 }

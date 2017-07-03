@@ -33,7 +33,7 @@ class OptionalMapper : Route.Mapper<Any> {
         return if (value.isPresent) {
             Results.with(value.get())
         } else {
-            Results.with(ApiError(Status.NOT_FOUND), Status.NOT_FOUND)
+            ApiError(Status.NOT_FOUND).toResult()
         }
     }
 }

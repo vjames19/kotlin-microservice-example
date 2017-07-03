@@ -10,6 +10,7 @@ import io.requery.Persistable
 import io.requery.sql.KotlinConfiguration
 import io.requery.sql.KotlinEntityDataStore
 import org.postgresql.ds.PGSimpleDataSource
+import org.postgresql.util.PSQLException
 import java.util.concurrent.Executors
 
 /**
@@ -34,7 +35,7 @@ fun main(args: Array<String>) {
     println(service.getUser(1).get())
 
     println(service.create(User(id = 0, username = "user${System.currentTimeMillis()}")).get())
-    println(service.create(User(id = 0, username = "user${System.currentTimeMillis()}")).get())
+    println(service.create(User(id = 0, username = "user${System.currentTimeMillis() + 1}")).get())
 
     try {
         println(service.create(User(id = 0, username = "vjames19")).get())
