@@ -14,6 +14,6 @@ inline fun <reified T> Module.bind(): AnnotatedBindingBuilder<T> {
 
 inline fun <reified T> Binder.bind() = bind(T::class.java)
 
-inline fun <reified T>AnnotatedBindingBuilder<in T>.to(): ScopedBindingBuilder = to(T::class.java)
+inline fun <reified T> AnnotatedBindingBuilder<in T>.to(): ScopedBindingBuilder = to(T::class.java)
 
 inline fun <reified T> Injector.getInstance(): T = getInstance(T::class.java)

@@ -3,7 +3,6 @@ package io.github.vjames19.kotlinmicroserviceexample.blog.util
 import io.requery.query.Result
 import io.requery.query.Scalar
 import io.requery.sql.RowCountException
-import org.postgresql.util.PSQLException
 import java.util.*
 
 /**

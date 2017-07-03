@@ -10,7 +10,6 @@ import io.requery.Persistable
 import io.requery.sql.KotlinConfiguration
 import io.requery.sql.KotlinEntityDataStore
 import org.postgresql.ds.PGSimpleDataSource
-import org.postgresql.util.PSQLException
 import java.util.concurrent.Executors
 
 /**
@@ -18,7 +17,7 @@ import java.util.concurrent.Executors
  */
 fun main(args: Array<String>) {
     val dataSource = PGSimpleDataSource().apply {
-        user  = "postgres"
+        user = "postgres"
         password = "postgres"
         databaseName = "blog"
     }

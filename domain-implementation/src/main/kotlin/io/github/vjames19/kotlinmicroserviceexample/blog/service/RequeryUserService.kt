@@ -32,9 +32,9 @@ class RequeryUserService @Inject constructor(val db: KotlinCompletableEntityStor
     override fun create(user: User): CompletableFuture<User> = db.execute {
         insert(user.toModel())
                 .toDomain()
-    }.recover { handleError(user, it) }
+    }.recover { mapError(user, it) }
 
-    private fun <A> handleError(user: User, throwable: Throwable): A = handlePsqlException(throwable) {
+    private fun <A> mapError(user: User, throwable: Throwable): A = handlePsqlException(throwable) {
         if (it.isIntegrityConstrainViolation()) throw UsernameAlreadyExistsUserServiceError(user.username)
         throw throwable
     }

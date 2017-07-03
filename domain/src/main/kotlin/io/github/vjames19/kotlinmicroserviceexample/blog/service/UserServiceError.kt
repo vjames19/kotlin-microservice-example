@@ -5,4 +5,4 @@ package io.github.vjames19.kotlinmicroserviceexample.blog.service
  */
 sealed class UserServiceError(message: String? = null, cause: Throwable? = null) : RuntimeException(message, cause)
 
-data class UsernameAlreadyExistsUserServiceError(val username: String): UserServiceError("username $username already exists")
+data class UsernameAlreadyExistsUserServiceError(val username: String) : UserServiceError("username $username already exists")

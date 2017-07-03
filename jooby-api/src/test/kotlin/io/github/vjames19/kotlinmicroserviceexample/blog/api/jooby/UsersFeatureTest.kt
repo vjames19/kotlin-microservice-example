@@ -4,8 +4,6 @@ import io.github.vjames19.kotlinmicroserviceexample.blog.domain.User
 import io.restassured.RestAssured.get
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeGreaterOrEqualTo
-import org.amshove.kluent.shouldEqual
-import org.amshove.kluent.shouldNotBe
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.given
@@ -17,7 +15,7 @@ import org.jooby.Status
  */
 object UsersFeatureTest : Spek({
 
-    jooby(app()) {
+    jooby(App()) {
         describe("Getting a user") {
             given("that the user doesn't exist") {
                 it("should return 404") {

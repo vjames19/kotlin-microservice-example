@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture
 class OptionalMapper : Route.Mapper<Any> {
 
     override fun map(value: Any?): Any? {
-        return when(value) {
+        return when (value) {
             is CompletableFuture<*> -> map(value)
             is Optional<*> -> map(value)
             else -> value

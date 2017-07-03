@@ -18,7 +18,7 @@ interface UserModel : Persistable {
     var username: String
 }
 
-fun UserModel.toDomain(): User = User(id = id, username =  username)
+fun UserModel.toDomain(): User = User(id = id, username = username)
 
 fun User.toModel(): UserModel {
     val ref = this
