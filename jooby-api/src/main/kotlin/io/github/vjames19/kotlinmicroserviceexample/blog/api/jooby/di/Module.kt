@@ -18,10 +18,6 @@ abstract class Module : Jooby.Module, AbstractModule() {
         return super.binder()
     }
 
-    fun b(): Binder {
-        return super.binder()
-    }
-
     override fun configure() {
     }
 }

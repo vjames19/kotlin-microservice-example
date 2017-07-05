@@ -1,5 +1,6 @@
 package io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby.renderer
 
+import io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby.error.ApiError
 import org.jooby.Result
 import org.jooby.Results
 import org.jooby.Route

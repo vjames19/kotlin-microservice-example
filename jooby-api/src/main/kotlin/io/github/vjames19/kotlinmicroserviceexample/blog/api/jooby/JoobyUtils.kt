@@ -1,6 +1,6 @@
 package io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby
 
-import io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby.renderer.ApiError
+import io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby.error.ApiError
 import org.jooby.Err
 import org.jooby.Kooby
 import org.jooby.Request

@@ -1,4 +1,4 @@
-package io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby.renderer
+package io.github.vjames19.kotlinmicroserviceexample.blog.api.jooby.error
 
 import org.jooby.Result
 import org.jooby.Results
